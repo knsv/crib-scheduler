@@ -5,9 +5,9 @@ var cronJob = require('cron').CronJob;
 var cribMq = require('crib-mq');
 
 var buss = cribMq.register('crib-scheduler', 'http://127.0.0.1:8900');
-
+console.log('Starting Scheduling service');
 module.exports = function(config){
-    config.cron.forEach(function (cronItem) {
+    config.scheduler.forEach(function (cronItem) {
         //log.trace('Setting up CRON event: ' + cronItem.id + 'with date str: ' + cronItem.date);
         var job = new cronJob(cronItem.date, function () {
             //console.log('Cron triggering event: ' + cronItem.id);
