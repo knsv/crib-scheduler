@@ -1,0 +1,27 @@
+{
+  "name": "crib-scheduler",
+  "version": "0.1.0",
+  "description": "Scheduling service for the crib home automation system.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/knsv/crib-scheduler.git"
+  },
+  "keywords": [
+    "home",
+    "automation"
+  ],
+  "author": "Knut Sveidqvist",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/knsv/crib-scheduler/issues"
+  },
+  "homepage": "https://github.com/knsv/crib-scheduler#readme",
+  "dependencies": {
+    "crib-mq": "git+https://github.com/knsv/crib-mq.git",
+    "cron": "^1.1.0"
+  }
+}
