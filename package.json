@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/knsv/crib-scheduler#readme",
   "dependencies": {
-    "crib-mq": "git+https://github.com/knsv/crib-mq.git",
     "cron": "^1.1.0"
   }
 }
