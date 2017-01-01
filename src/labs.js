@@ -6,7 +6,7 @@ var cribMq = require('../../crib-mq');
 
 var cribLog = require('../../crib-log/src/api');
 
-var log = cribLog.createLogger('crib-scheduler', 'debug');
+var log = cribLog.createLogger('crib-scheduler-labs', 'debug');
 
 var buss = cribMq.register('crib-scheduler');
 log.info('Starting Scheduling service ', process.cwd());
@@ -39,10 +39,6 @@ module.exports.start = function(scheduleConf) {
 };
 
 log.debug('Loading config from storage', process.cwd());
-storage.get('scheduler').then((storageConf) => {
-  log.debug('Config received', storageConf);
-  module.exports.start(storageConf);
-});
 
 storage.get('dayDefinition').then((def) => {
   let dayDefinition;
@@ -75,8 +71,12 @@ storage.get('dayDefinition').then((def) => {
 
     // Todo save new conf
     storage.set('dayDefinition', dayDefinition);
+    dayState.init(dayDefinition, buss); 
   }
-  dayState.init(dayDefinition, buss);  
+  else {
+    dayState.init(def, buss); 
+  }
+   
 });
 
 exports.stop = function() {
@@ -87,24 +87,3 @@ exports.stop = function() {
   jobList = [];
 };
 
-buss.on('START_SCHEDULER', function() {
-  storage.get('scheduler').then((storageConf) => {
-    log.debug('Config received', storageConf);
-    module.exports.start(storageConf);
-  });
-});
-
-buss.on('STOP_SCHEDULER', function() {
-  jobList.forEach(function(aCronJob) {
-    aCronJob.stop();
-  });
-});
-
-buss.on('RESTART_SCHEDULER', function() {
-  log.debug('RESTARTING SCHEDULER');
-  jobList.forEach(function(aCronJob) {
-    aCronJob.stop();
-  });
-  log.debug('Jobs stopped, starting jobs again');
-  buss.emit('START_SCHEDULER');
-});
