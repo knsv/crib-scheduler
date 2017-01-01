@@ -121,10 +121,10 @@ exports.init = function(cnf, _buss) {
     state.DAY_STATE = exports.findCurrentState(cnf.weekend, now);
   }
   console.log('before emit');
-  buss.emit('DAY_STATE_CHANGE', state.DAY_STATE);
+  buss.emit('DAY_STATE_CHANGE', [state.DAY_STATE]);
 
   buss.on('REQUEST_DAY_STATE',()=>{
-    buss.emit('DAY_STATE', state.DAY_STATE);
+    buss.emit('DAY_STATE', [state.DAY_STATE]);
   });
 
 };
