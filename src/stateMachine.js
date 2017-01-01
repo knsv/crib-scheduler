@@ -50,7 +50,7 @@ exports.registerCronjob = function(hourStr, eventName, weekday) {
   var job = new cronJob(cronStr, function() {
     state.DAY_STATE = eventName;
     buss.emit('DAY_STATE_CHANGE', [state.DAY_STATE]);
-  }, false, 'Europe/Stockholm');
+  }, false, process.env.TZ);
 
 };
 
