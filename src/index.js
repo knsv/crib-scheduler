@@ -75,8 +75,12 @@ storage.get('dayDefinition').then((def) => {
 
     // Todo save new conf
     storage.set('dayDefinition', dayDefinition);
+    dayState.init(dayDefinition, buss); 
   }
-  dayState.init(dayDefinition, buss);  
+  else {
+    dayState.init(def, buss); 
+  }
+   
 });
 
 exports.stop = function() {
