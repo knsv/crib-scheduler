@@ -33,7 +33,7 @@ module.exports.start = function(scheduleConf) {
       } else {
         buss.emit(cronItem.id, cronItem.args);
       }
-    }, null, true);
+    }, false, 'Europe/Stockholm');
     jobList.push(job);
   });
 };
