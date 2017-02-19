@@ -35,6 +35,7 @@ module.exports.start = function(scheduleConf) {
       }
     }, false, process.env.TZ);
     jobList.push(job);
+    job.start();
   });
 };
 
