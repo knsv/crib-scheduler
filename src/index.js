@@ -33,7 +33,7 @@ module.exports.start = function(scheduleConf) {
       } else {
         buss.emit(cronItem.id, cronItem.args);
       }
-    }, false, process.env.TZ);
+    }, false, 'Europe/Stockholm');
     jobList.push(job);
     job.start();
   });
@@ -76,12 +76,12 @@ storage.get('dayDefinition').then((def) => {
 
     // Todo save new conf
     storage.set('dayDefinition', dayDefinition);
-    dayState.init(dayDefinition, buss); 
+    dayState.init(dayDefinition, buss);
   }
   else {
-    dayState.init(def, buss); 
+    dayState.init(def, buss);
   }
-   
+
 });
 
 exports.stop = function() {

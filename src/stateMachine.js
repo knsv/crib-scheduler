@@ -51,7 +51,7 @@ exports.registerCronjob = function(hourStr, eventName, weekday) {
     state.DAY_STATE = eventName;
     buss.emit('DAY_STATE_CHANGE', [state.DAY_STATE]);
   }, false, process.env.TZ);
-
+  job.start();
 };
 
 exports.findCurrentState = function(intervalls, date) {
